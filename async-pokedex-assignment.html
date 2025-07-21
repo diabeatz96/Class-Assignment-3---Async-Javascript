@@ -1,0 +1,64 @@
+<!--
+  In-Class Assignment: Async JavaScript Pokedex
+  --------------------------------------------------
+  This assignment teaches you how to use async/await with fetch to interact with APIs in JavaScript.
+  Follow the instructions on the page and observe how asynchronous code works in practice!
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Async JavaScript Pokedex Assignment</title>
+  <!-- Google Fonts for pixelated style -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Async JavaScript Pokedex</h1>
+    <p><strong>In-Class Assignment:</strong> Learn how to use <code>async/await</code> and <code>fetch</code> to get data from an API.<br>
+      <em>Type a Pokémon name or ID and click "Search" to see it in action!</em></p>
+  </header>
+  <main>
+    <section class="pokedex">
+      <div class="input-section">
+        <input type="text" id="pokemonInput" placeholder="Enter name or ID..." aria-label="Pokemon name or ID">
+        <button id="searchBtn">Search</button>
+      </div>
+      <div class="display-section" id="displaySection">
+        <span style="color:#888;">Pokémon info will appear here.</span>
+      </div>
+    </section>
+    <section class="explanation-section">
+      <h2 style="margin-top:0;">How does this work?</h2>
+      <p>
+        This Pokedex uses <strong>asynchronous JavaScript</strong> to fetch data from the <a href="https://pokeapi.co/" target="_blank" style="color:#43a047;">PokeAPI</a>.<br>
+        The main function uses <code>async</code> and <code>await</code> to make the code easier to read and write.
+      </p>
+      <div>
+        <strong>Key code snippet:</strong>
+        <pre class="code-snippet"><code>// Async function to fetch Pokémon data
+async function fetchPokemon(nameOrId) {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${nameOrId.toLowerCase()}`);
+    if (!response.ok) throw new Error('Not found');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}</code></pre>
+      </div>
+      <ul>
+        <li><strong>async</strong>: Declares a function that returns a Promise and can use <code>await</code>.</li>
+        <li><strong>await</strong>: Pauses the function until the Promise resolves (e.g., until <code>fetch</code> gets a response).</li>
+        <li><strong>fetch</strong>: Makes a network request to get data from an API (returns a Promise).</li>
+        <li><strong>try...catch</strong>: Handles errors, such as network issues or Pokémon not found.</li>
+        <li>Open the browser console to see the raw data fetched and how it's parsed!</li>
+      </ul>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

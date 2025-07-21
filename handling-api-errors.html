@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handling Common API & Network Errors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Roboto', Arial, sans-serif; background: #f5f5f5; color: #222; margin: 0; min-height: 100vh; }
+    .container { max-width: 700px; margin: 2rem auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 2rem 2rem 1.5rem 2rem; }
+    h1, h2 { color: #e53935; }
+    code, pre { background: #f0f0f0; border-radius: 6px; padding: 0.2em 0.4em; font-size: 1em; }
+    ul { margin-top: 0.5rem; }
+    .error { color: #e53935; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Handling Common Errors with Network Requests & APIs</h1>
+    <h2>Types of Errors</h2>
+    <ul>
+      <li><span class="error">Network errors:</span> No internet, server down, DNS issues.</li>
+      <li><span class="error">HTTP errors:</span> 404 Not Found, 500 Server Error, 401 Unauthorized, etc.</li>
+      <li><span class="error">Invalid data:</span> API returns unexpected or malformed data.</li>
+      <li><span class="error">Timeouts:</span> The request takes too long and fails.</li>
+      <li><span class="error">Rate limiting:</span> Too many requests in a short time (API blocks you temporarily).</li>
+    </ul>
+    <h2>How to Handle Errors in JavaScript</h2>
+    <pre><code>async function fetchData(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('HTTP error! Status: ' + response.status);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // Handle network, HTTP, or parsing errors
+    console.error('Fetch error:', error);
+    // Show a user-friendly message or retry
+  }
+}
+</code></pre>
+    <h2>Best Practices</h2>
+    <ul>
+      <li>Always use <code>try...catch</code> with <code>async/await</code> or <code>.catch()</code> with Promises.</li>
+      <li>Check <code>response.ok</code> and <code>response.status</code> for HTTP errors.</li>
+      <li>Show clear, helpful error messages to users (not just "Something went wrong").</li>
+      <li>Log errors for debugging, but avoid exposing sensitive info to users.</li>
+      <li>Consider retrying failed requests (with a limit).</li>
+      <li>Handle rate limits by waiting and retrying, or showing a message.</li>
+      <li>Validate and check the data you receive before using it.</li>
+    </ul>
+    <h2>Example: Handling Different Errors</h2>
+    <pre><code>async function getUser(id) {
+  try {
+    const res = await fetch(`https://api.example.com/users/${id}`);
+    if (res.status === 404) {
+      throw new Error('User not found');
+    }
+    if (!res.ok) {
+      throw new Error('Server error: ' + res.status);
+    }
+    const user = await res.json();
+    if (!user.name) {
+      throw new Error('Invalid user data');
+    }
+    return user;
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
+}
+</code></pre>
+    <p style="color:#888;">Good error handling makes your apps more reliable and user-friendly!</p>
+  </div>
+</body>
+</html>

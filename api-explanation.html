@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APIs: Core Functionality & Use Cases</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 2rem 2rem 1.5rem 2rem;
+    }
+    h1, h2 {
+      color: #e53935;
+    }
+    code, pre {
+      background: #f0f0f0;
+      border-radius: 6px;
+      padding: 0.2em 0.4em;
+      font-size: 1em;
+    }
+    ul {
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Getting Data from APIs: Core Functionality & Use Cases</h1>
+    <h2>What is an API?</h2>
+    <p><strong>API</strong> stands for <em>Application Programming Interface</em>. It allows different software systems to communicate and share data.</p>
+    <h2>How do you get data from an API?</h2>
+    <ol>
+      <li>Find the API endpoint (URL) that provides the data you want.</li>
+      <li>Use a tool like <code>fetch</code> (in JavaScript) to make a request to that endpoint.</li>
+      <li>Handle the response, usually in JSON format, and use it in your app.</li>
+    </ol>
+    <h2>Example: Fetching Data from an API in JavaScript</h2>
+    <pre><code>// Example: Get a random user from the Random User API
+async function getRandomUser() {
+  const response = await fetch('https://randomuser.me/api/');
+  const data = await response.json();
+  console.log(data); // Use the data in your app
+}
+getRandomUser();
+</code></pre>
+      <h2>How does the data fetching process work?</h2>
+      <ol>
+        <li><strong>Your code</strong> (in your browser or computer) calls <code>fetch()</code> with the API URL.</li>
+        <li><code>fetch()</code> returns a <strong>Promise</strong> that represents the ongoing network request.</li>
+        <li>While waiting, your code can keep running (this is asynchronous).</li>
+        <li>When the server responds, the <code>Promise</code> resolves with a <code>Response</code> object.</li>
+        <li>You call <code>response.json()</code> (or <code>response.text()</code>) to process the data, which also returns a <strong>Promise</strong>.</li>
+        <li>When the data is ready, you use it in your app (e.g., display it on the page).</li>
+      </ol>
+      <h3>Step-by-step with Promises:</h3>
+      <pre><code>// Using Promises (without async/await)
+      fetch('https://randomuser.me/api/')
+        .then(response => response.json()) // Step 1: Get JSON data
+        .then(data => {
+          // Step 2: Use the data
+          console.log('User data:', data);
+        })
+        .catch(error => {
+          // Step 3: Handle errors
+          console.error('Error fetching data:', error);
+        });
+      </code></pre>
+      <ul>
+        <li><strong>fetch()</strong> starts the request and returns a Promise.</li>
+        <li><strong>.then()</strong> lets you process the result when it's ready.</li>
+        <li><strong>.catch()</strong> lets you handle errors (like network issues).</li>
+      </ul>
+      <h3>With async/await (same process, different style):</h3>
+      <pre><code>async function getData() {
+        try {
+          const response = await fetch('https://randomuser.me/api/');
+          const data = await response.json();
+          console.log('User data:', data);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+      getData();
+      </code></pre>
+      <ul>
+        <li><strong>await</strong> pauses the function until the Promise resolves.</li>
+        <li><strong>try...catch</strong> is used for error handling.</li>
+      </ul>
+    <h2>Common Use Cases for APIs</h2>
+    <ul>
+      <li><strong>Weather apps:</strong> Get live weather data from a weather API.</li>
+      <li><strong>Maps & location:</strong> Show maps or get directions using APIs like Google Maps.</li>
+      <li><strong>Social media:</strong> Display posts, tweets, or user info from platforms like Twitter or Instagram.</li>
+      <li><strong>Games:</strong> Get game stats, leaderboards, or in-game data from gaming APIs.</li>
+      <li><strong>Pokédex:</strong> Fetch Pokémon data from the PokeAPI (like in your assignment!).</li>
+      <li><strong>Finance:</strong> Show stock prices or currency rates from financial APIs.</li>
+    </ul>
+    <h2>Why use APIs?</h2>
+    <ul>
+      <li>Access up-to-date data from around the world.</li>
+      <li>Integrate powerful features without building everything from scratch.</li>
+      <li>Connect your app to other services and platforms.</li>
+    </ul>
+    <p style="margin-top:2rem;color:#888;">APIs are everywhere! Learning to use them is a key skill for modern web development.</p>
+  </div>
+</body>
+</html>
