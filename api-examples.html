@@ -25,6 +25,20 @@
             </p>
         </details>
     </section>
+        <section>
+            <h2>Example 2: Text-to-Speech (SpeechSynthesis API)</h2>
+            <p>This example shows how to use the browser's built-in <code>SpeechSynthesis</code> API to convert text to speech. Enter some text and click the button to hear it spoken aloud.</p>
+            <input type="text" id="tts-input" placeholder="Type something to speak...">
+            <button id="tts-btn">Speak</button>
+            <div id="tts-status" style="margin-top:0.5rem;color:#888;"></div>
+            <details>
+                <summary>How does this work?</summary>
+                <p>
+                    The <code>SpeechSynthesis</code> API is built into most modern browsers. When you click the button, JavaScript creates a <code>SpeechSynthesisUtterance</code> object with your text and calls <code>speechSynthesis.speak()</code> to play the voice.<br>
+                    This is a great way to add accessibility or interactive features to your web apps without needing an external API key.
+                </p>
+            </details>
+        </section>
     <script src="api-examples.js"></script>
 </body>
 </html>

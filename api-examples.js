@@ -50,3 +50,24 @@ document.getElementById('tvmaze-search-btn').addEventListener('click', async () 
         resultsDiv.textContent = 'Error fetching data: ' + error.message;
     }
 });
+
+// Example 2: Text-to-Speech (SpeechSynthesis API)
+document.getElementById('tts-btn').addEventListener('click', () => {
+    const input = document.getElementById('tts-input').value.trim();
+    const statusDiv = document.getElementById('tts-status');
+    statusDiv.textContent = '';
+    if (!input) {
+        statusDiv.textContent = 'Please enter some text to speak.';
+        return;
+    }
+    // Create utterance and speak
+    const utterance = new SpeechSynthesisUtterance(input);
+    window.speechSynthesis.speak(utterance);
+    statusDiv.textContent = 'Speaking...';
+    utterance.onend = () => {
+        statusDiv.textContent = 'Done speaking.';
+    };
+    utterance.onerror = () => {
+        statusDiv.textContent = 'Error: Could not speak the text.';
+    };
+});
