@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Examples with Fetch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>API Examples Using Fetch</h1>
+    <section>
+        <h2>Example 1: TVmaze API</h2>
+        <p>This example demonstrates how to use <code>fetch</code> to get data from the <a href="https://www.tvmaze.com/api" target="_blank">TVmaze API</a>. Enter a show name below to search for TV shows.</p>
+        <input type="text" id="tvmaze-search" placeholder="Search for a show...">
+        <button id="tvmaze-search-btn">Search</button>
+        <div id="tvmaze-results"></div>
+        <details>
+            <summary>How does this work?</summary>
+            <p>
+                The <code>fetch</code> function is used to make HTTP requests in JavaScript. In this example, we use <code>fetch</code> to call the TVmaze API's search endpoint:
+                <br>
+                <code>https://api.tvmaze.com/search/shows?q=QUERY</code>
+                <br>
+                The API returns a list of shows matching the search term. We then display the results below.
+            </p>
+        </details>
+    </section>
+    <script src="api-examples.js"></script>
+</body>
+</html>
